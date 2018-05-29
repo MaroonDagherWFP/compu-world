@@ -22,4 +22,4 @@ Route::get('unshared', 'DataController@getDataWithShared0');
 Route::get('owned', 'DataController@getDataWithCreator1');
 Route::get('unowned', 'DataController@getDataWithCreator0');
 Route::get('duplicates', 'DataController@findDuplicatedFileNames');
-Route::post('search', 'DataController@findByDate');
+Route::get('search', 'DataController@findByDate');

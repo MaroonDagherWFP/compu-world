@@ -43,7 +43,7 @@ class DataController extends Controller
 
     	// return data in pages to display
     	$data = $this->dataService->paginate($collection);
-        return View::make('shared-files')->with('data', $data);
+        return View::make('unshared-files')->with('data', $data);
     }
 
     public function getDataWithCreator1()
@@ -63,7 +63,7 @@ class DataController extends Controller
 
     	// return data in pages to display
         $data = $this->dataService->paginate($collection);
-        return View::make('owned-files')->with('data', $data);
+        return View::make('not-owned-files')->with('data', $data);
     }
 
     public function findDuplicatedFileNames()

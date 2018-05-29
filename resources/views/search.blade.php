@@ -5,6 +5,24 @@
             {{$error}}
         @endif
         @if(isset($data))
+        <nav aria-label="pagination">
+            <ul class="pagination justify-content-end">
+                <li class="page-item"><a class="page-link" href="search?page=1">First</a></li>
+                @if($data->currentPage() === 1)
+                    <li class="page-item disabled">
+                        <a class="page-link" href="{{$data->url($data->currentPage() - 1)}}">Previous</a>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a class="page-link" href="search?page={{$data->currentPage() - 1}}">Previous</a>
+                    </li>
+                @endif
+                <li class="page-item">
+                    <a class="page-link" href="{{$data->url($data->currentPage() + 1)}}">Next</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="{{$data->url($data->lastPage())}}">Last</a></li>
+            </ul>
+        </nav>  
         <table class="table">
             <thead>
                 <tr>

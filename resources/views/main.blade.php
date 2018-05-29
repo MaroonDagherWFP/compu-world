@@ -39,7 +39,7 @@
 
         <main class="py-4 full-height">
             <div class="container">
-                <form class="row" method="post" action="search">
+                <form class="row" method="get" action="search">
                     {{ csrf_field() }}
                     <div class="col-6" class="form-group">
                         <label for="start-date">Start Date</label>
