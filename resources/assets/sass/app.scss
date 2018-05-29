@@ -8,7 +8,61 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.navbar-compuworld {
+  background-color: rgb(40, 147, 252);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: #fff;
+}
+
+.navbar-light .navbar-brand {
+	color: #fff;
+}
+
+.full-height {
+	height: calc(100% - 55px);
+}
+
+.card {
+	min-height: 300px;
+	margin-bottom: 5px;
+}
+
+.min-height-150 {
+	min-height: 150px !important;
+}
+
+.uploaded-text {
+	padding: 5px;
+	font-size: 17px;
+    font-weight: bold;
+    color: #7d7d7d;
+}
+
+.margin-h-5 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.display-block {
+	display: block !important;
+}
+
+.large-font {
+	font-size: 16px;
+}
+
+.bold-font {
+	font-size: 17px;
+    font-weight: bold;
+}
+
+.note-font {
+	font-size: 12px !important;
+}
+
+.font-red {
+	color: red;
 }

@@ -6,6 +6,7 @@ use App\Services\DataService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
 
 class DataController extends Controller
 {
@@ -31,7 +32,8 @@ class DataController extends Controller
     	$collection = $data->where('shared', 1);
 
     	// return data in pages to display
-    	return $this->dataService->paginate($collection);
+    	$data = $this->dataService->paginate($collection);
+        return View::make('shared-files')->with('data', $data);
     }
 
     public function getDataWithShared0()
@@ -40,7 +42,8 @@ class DataController extends Controller
     	$collection = $data->where('shared', 0);
 
     	// return data in pages to display
-    	return $this->dataService->paginate($collection);
+    	$data = $this->dataService->paginate($collection);
+        return View::make('shared-files')->with('data', $data);
     }
 
     public function getDataWithCreator1()
@@ -49,7 +52,8 @@ class DataController extends Controller
     	$collection = $data->where('creator', 1);
 
     	// return data in pages to display
-    	return $this->dataService->paginate($collection);
+    	$data = $this->dataService->paginate($collection);
+        return View::make('owned-files')->with('data', $data);
     }
 
     public function getDataWithCreator0()
@@ -58,7 +62,8 @@ class DataController extends Controller
     	$collection = $data->where('creator', 0);
 
     	// return data in pages to display
-    	return $this->dataService->paginate($collection);
+        $data = $this->dataService->paginate($collection);
+        return View::make('owned-files')->with('data', $data);
     }
 
     public function findDuplicatedFileNames()
@@ -80,20 +85,31 @@ class DataController extends Controller
 
 		// $duplicated_name = $data->diff($collection_unique);
     	// return data in pages to display
-    	return $file_names_dups;
+    	$data = $file_names_dups;
+        return View::make('duplicate-files')->with('data', $data);
     }
 
     public function findByDate()
     {
-    	$start_date = isset($this->request->start_date) ? Carbon::parse($this->request->start_date) : Carbon::parse('2018-01-01');
-    	$end_date = isset($this->request->end_date) ? Carbon::parse($this->request->end_date) : Carbon::now();
-    	$data = $this->getData();
-    	
-    	$start_date = new \DateTime($start_date);
-    	$end_date = new \DateTime($end_date);
+        try {
+        	$start_date = isset($this->request->start_date) ? Carbon::parse($this->request->start_date) : Carbon::parse('1900-01-01');
+        	$end_date = isset($this->request->end_date) ? Carbon::parse($this->request->end_date) : Carbon::parse('1900-01-01');
+        	$data = $this->getData();
 
-    	$collection = $data->where('date_modified', '>=', $start_date->getTimestamp())->where('date_modified', '<=', $end_date->getTimestamp());
+        	$start_date = new \DateTime($start_date);
+        	$end_date = new \DateTime($end_date);
 
-		return $this->dataService->paginate($collection);
+        	$collection = $data->where('date_modified', '>=', $start_date->getTimestamp())->where('date_modified', '<=', $end_date->getTimestamp());
+
+    		$data = $this->dataService->paginate($collection);
+            return View::make('search')->with('data', $data);
+        } catch(\Exception $e) {
+            return View::make('search')->with('error', 'Date String invalid Try Again');
+        }
+    }
+
+    public function search()
+    {
+        return View::make('search');
     }
 }

@@ -17,4 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('test', 'DataController@findByDate');
+
+	// "start_date" : "2018-01-01",
+	// "end_date" : "2018-05-29"
+// Route::post('search/date', 'DataController@findByDate');
+
+// routes to test
+// Route::get('search/date', 'DataController@getDataWithShared1');
+// Route::get('search/date', 'DataController@getDataWithShared0');
+// Route::get('search/date', 'DataController@getDataWithCreator1');
+// Route::get('search/date', 'DataController@getDataWithCreator0');
+// Route::get('search/date', 'DataController@findDuplicatedFileNames');
