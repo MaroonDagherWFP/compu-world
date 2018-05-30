@@ -75,7 +75,7 @@ class DataService {
 
 		$old_collection = null;
 		$merged_collection = null;
-		
+
 		foreach ($tables as $key => $table) {
 			$next_collection = DB::table($table)->select('*')->get();
 			$merged_collection = $next_collection->merge($old_collection);
@@ -100,7 +100,10 @@ class DataService {
     	$main_collection = null;
 
     	foreach ($data_in_db as $database => $collection) {
-    		$main_collection = $collection->merge($main_collection);
+    		if($collection != null) {
+
+    			$main_collection = $collection->merge($main_collection);
+    		}
     	}
 
     	return $main_collection;
