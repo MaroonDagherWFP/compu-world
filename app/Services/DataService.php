@@ -74,7 +74,8 @@ class DataService {
 		$data = array();
 
 		$old_collection = null;
-
+		$merged_collection = null;
+		
 		foreach ($tables as $key => $table) {
 			$next_collection = DB::table($table)->select('*')->get();
 			$merged_collection = $next_collection->merge($old_collection);
